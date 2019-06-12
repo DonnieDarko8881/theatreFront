@@ -62,6 +62,82 @@ public class TheatreClient {
                 .orElseGet(ArrayList::new);
     }
 
+    public List<StageDto> getStages() {
+        URI url = null;
+        try {
+            url = new URI("http://localhost:8080/v1/stages");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return ofNullable(restTemplate.getForObject(url, StageDto[].class)).
+                map(Arrays::asList)
+                .orElseGet(ArrayList::new);
+    }
+
+    public UserDto getUserByMail(String mail) {
+        URI url = getUriUserByMail(mail);
+        return restTemplate.getForObject(url, UserDto.class);
+    }
+
+    private URI getUriUserByMail(String mail) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/users/findBy/")
+                .path(mail)
+                .build().encode().toUri();
+    }
+
+    public Boolean loginSuccess(String mail, String password) {
+        URI url = getUriLoginSuccess(mail, password);
+        return restTemplate.getForObject(url, Boolean.class);
+    }
+
+
+    private URI getUriLoginSuccess(String mail, String password) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/users/")
+                .path(mail)
+                .path("/")
+                .path(password)
+                .build().encode().toUri();
+    }
+
+    public Boolean mailExist(String mail) {
+        URI url = getUriMailExist(mail);
+        return restTemplate.getForObject(url, Boolean.class);
+    }
+
+
+    private URI getUriMailExist(String mail) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/users/")
+                .path(mail)
+                .build().encode().toUri();
+    }
+
+    public List<UserDto> getUsers() {
+        URI url = null;
+        try {
+            url = new URI("http://localhost:8080/v1/users");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return ofNullable(restTemplate.getForObject(url, UserDto[].class)).
+                map(Arrays::asList)
+                .orElseGet(ArrayList::new);
+    }
+
+    public List<ReservationDto> getReservations() {
+        URI url = null;
+        try {
+            url = new URI("http://localhost:8080/v1/reservations");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return ofNullable(restTemplate.getForObject(url, ReservationDto[].class)).
+                map(Arrays::asList)
+                .orElseGet(ArrayList::new);
+    }
+
     public List<SpectacleDto> getSpectaclesOfActor(long actorId) {
         URI url = getUriSpectaclesOfActors(actorId);
         return ofNullable(restTemplate.getForObject(url, SpectacleDto[].class)).
@@ -107,8 +183,8 @@ public class TheatreClient {
     }
 
     public void changeStatus(String stageCopyId, String seatsId, String status) {
-        URI url = getUriChangeStatus(stageCopyId,seatsId,status);
-        restTemplate.put(url,null);
+        URI url = getUriChangeStatus(stageCopyId, seatsId, status);
+        restTemplate.put(url, null);
     }
 
     private URI getUriChangeStatus(String stageCopyId, String seatsId, String status) {
@@ -122,10 +198,40 @@ public class TheatreClient {
                 .build().encode().toUri();
     }
 
+    public void saveStage(StageDto stageDto) {
+        String url = "http://localhost:8080/v1/stages";
+        HttpEntity<StageDto> request = new HttpEntity<>(stageDto);
+        restTemplate.postForEntity(url, request, StageDto.class);
+    }
+
+    public void updateStage(StageDto stageDto) {
+        String url = "http://localhost:8080/v1/stages";
+        HttpEntity<StageDto> request = new HttpEntity<>(stageDto);
+        restTemplate.put(url, request, StageDto.class);
+    }
+
     public void saveReservation(ReservationDto reservationDto) {
         String url = "http://localhost:8080/v1/reservations";
         HttpEntity<ReservationDto> request = new HttpEntity<>(reservationDto);
         restTemplate.postForEntity(url, request, ReservationDto.class);
+    }
+
+    public void saveUser(UserDto userDto) {
+        String url = "http://localhost:8080/v1/users";
+        HttpEntity<UserDto> request = new HttpEntity<>(userDto);
+        restTemplate.postForEntity(url, request, UserDto.class);
+    }
+
+    public void saveActor(ActorDto actorDto) {
+        String url = "http://localhost:8080/v1/actors";
+        HttpEntity<ActorDto> request = new HttpEntity<>(actorDto);
+        restTemplate.postForEntity(url, request, ActorDto.class);
+    }
+
+    public void saveSpectacle(SpectacleDto spectacleDto) {
+        String url = "http://localhost:8080/v1/spectacles";
+        HttpEntity<SpectacleDto> request = new HttpEntity<>(spectacleDto);
+        restTemplate.postForEntity(url, request, SpectacleDto.class);
     }
 
 
@@ -157,18 +263,61 @@ public class TheatreClient {
                 .build().encode().toUri();
     }
 
-    public void saveStageCopy(String stageId, String dateId) {
-        URI uri = getUriSaveStageCopy(stageId, dateId);
+    public void deleteActor(String actorId) {
+        URI uri = getUriDeleteActor(actorId);
+        restTemplate.delete(uri);
+    }
+
+    private URI getUriDeleteActor(String actorId) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/actors/")
+                .path(actorId)
+                .build().encode().toUri();
+    }
+
+    public void deleteSpectacle(String spectacleId) {
+        URI uri = getUriDeleteSpectacle(spectacleId);
+        restTemplate.delete(uri);
+    }
+
+    private URI getUriDeleteSpectacle(String spectacleId) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/spectacles/")
+                .path(spectacleId)
+                .build().encode().toUri();
+    }
+
+
+    public void saveStageCopy(String stageId, String dateId, String spectaclePrice) {
+        URI uri = getUriSaveStageCopy(stageId, dateId, spectaclePrice);
         restTemplate.postForEntity(uri, null, StageCopyDto.class);
 
     }
 
-    private URI getUriSaveStageCopy(String stageId, String dateId){
+    private URI getUriSaveStageCopy(String stageId, String dateId, String spectaclePrice) {
         return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
                 .path("/stageCopies/")
                 .path(stageId)
                 .path("/dates/")
                 .path(dateId)
+                .path("/price/")
+                .path(spectaclePrice)
                 .build().encode().toUri();
     }
+
+    public void addActorToCast(String spectacleId, String actorId) {
+        URI uri = getUriaddActorToCast(spectacleId, actorId);
+        restTemplate.put(uri, null);
+    }
+
+    private URI getUriaddActorToCast(String spectacleId, String actorId) {
+        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
+                .path("/spectacles/")
+                .path(spectacleId)
+                .path("/actors/")
+                .path(actorId)
+                .build().encode().toUri();
+
+    }
+
 }

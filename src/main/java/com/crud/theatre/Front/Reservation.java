@@ -67,7 +67,7 @@ public class Reservation extends VerticalLayout {
 
         bookButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        stageCopyDtoGrid.setColumns("id", "date", "spectacleName", "seats");
+        stageCopyDtoGrid.setColumns("id", "date", "spectacleName", "seats", "spectaclePricePLN");
         stageCopyDtoGrid.getColumnByKey("seats").setVisible(false);
         stageCopyDtoGrid.getColumnByKey("id").setVisible(false);
 
@@ -111,6 +111,8 @@ public class Reservation extends VerticalLayout {
 
         seatsGrid.asSingleSelect().addValueChangeListener(event -> {
             try {
+                seatsNumberText.setValue(String.valueOf(event.getValue().getNumber()));
+                seatsIdText.setValue(String.valueOf(event.getValue().getId()));
                 String userId = theatre.getUserId();
                 if (theatre.getUserId() != null) {
                     userIdText.setValue(userId);
@@ -131,8 +133,6 @@ public class Reservation extends VerticalLayout {
                     statusForm.setVisible(false);
                 }
 
-                seatsNumberText.setValue(String.valueOf(event.getValue().getNumber()));
-                seatsIdText.setValue(String.valueOf(event.getValue().getId()));
             } catch (NullPointerException e) {
             }
             userIdText.focus();

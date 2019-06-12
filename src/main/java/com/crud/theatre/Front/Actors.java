@@ -60,6 +60,7 @@ public class Actors extends VerticalLayout {
             }catch (NullPointerException e){
 
             }
+            refresh();
         });
     }
 

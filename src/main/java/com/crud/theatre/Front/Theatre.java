@@ -1,11 +1,14 @@
 package com.crud.theatre.Front;
 
+import com.crud.theatre.controller.UserController;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -16,38 +19,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Theatre extends VerticalLayout {
     private String userId;
     private TextField mailText = new TextField("Mail");
+    private PasswordField passwordField = new PasswordField("Password");
+
     private Button signInButton = new Button(new Icon(VaadinIcon.SIGN_IN));
+    private Button registerButton = new Button("Register");
     private Button login = new Button("Login");
+    private Button administationPanelButton = new Button("Administration Panel");
     private Button spectacle = new Button("Spectacle");
     private Button actors = new Button("Actors");
     private Button repertoire = new Button("Repertoire");
     private Button reservation = new Button("Reservation");
-    private HorizontalLayout loginForm = new HorizontalLayout(mailText,signInButton);
+    private FormLayout loginForm = new FormLayout(mailText, passwordField, signInButton, registerButton);
 
-//    private Reservation resev;
+
+    private FormLayout registerForm;
+    private UserController userController;
+
+    //    private Reservation resev;
     @Autowired
-    public Theatre() {
+    public Theatre(FormLayout registerForm, UserController userController) {
+        this.registerForm = registerForm;
+        this.userController = userController;
 
-        HorizontalLayout toolBar = new HorizontalLayout(login, spectacle, actors, repertoire, reservation);
-        add(toolBar, loginForm);
-
+        HorizontalLayout toolBar = new HorizontalLayout(login, administationPanelButton, spectacle, actors, repertoire, reservation);
+        add(toolBar, loginForm, this.registerForm);
+        loginForm.setWidth("400px");
         loginForm.setVisible(false);
+        administationPanelButton.setVisible(false);
+        this.registerForm.setVisible(false);
+
 
         navigate(spectacle, "spectacles");
         navigate(actors, "actors");
         navigate(repertoire, "repertoire");
         navigate(reservation, "reservation");
+        navigate(administationPanelButton, "adminPanel");
 
         login.addClickListener(event -> {
             loginForm.setVisible(true);
+            this.registerForm.setVisible(false);
+        });
+
+        registerButton.addClickListener(event -> {
+            loginForm.setVisible(false);
+            this.registerForm.setVisible(true);
+
         });
 
         signInButton.addClickListener(event -> {
-            setUserId(mailText.getValue());
-            Notification.show("narazie zamiast miala wpisuje id użytkownika lub id administratora");
-            loginForm.setVisible(true);
+            if (userController.loginSuccess(mailText.getValue(), passwordField.getValue())) {
+                setUserId(String.valueOf(userController.getUserDtoByMail(mailText.getValue()).getId()));
+                Notification.show("Logged in successfully");
+                loginForm.setVisible(false);
+                administationPanelButton.setVisible(false);
+            } else if (mailText.getValue().equals("ADMIN") && passwordField.getValue().equals("ADMIN")) {
+                setUserId("ADMIN");
+                administationPanelButton.setVisible(true);
+                loginForm.setVisible(false);
+            } else {
+                Notification.show("Password or mail is wrong");
+            }
         });
-
 
 
     }

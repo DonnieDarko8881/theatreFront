@@ -16,7 +16,8 @@ public class StageCopyMapper {
                         copyDto.getId(),
                         copyDto.getSpectacleDateDto().getDate().toString(),
                         copyDto.getSpectacleDateDto().getSpectacleDto().getName(),
-                        copyDto.getSeats()
+                        copyDto.getSeats(),
+                        copyDto.getSpectaclePricePLN()
                 ))
                 .collect(Collectors.toList());
     }

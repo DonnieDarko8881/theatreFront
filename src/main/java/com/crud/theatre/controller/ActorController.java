@@ -24,4 +24,12 @@ public class ActorController {
     public List<ActorDto> getActors(){
        return theatreClient.getActorsDtoList();
     }
+
+    public void saveActor(ActorDto actorDto){
+        theatreClient.saveActor(actorDto);
+    }
+
+    public void deleteActor(String actorId){
+        theatreClient.deleteActor(actorId);
+    }
 }

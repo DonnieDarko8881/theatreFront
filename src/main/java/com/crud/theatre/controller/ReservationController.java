@@ -33,4 +33,7 @@ public class ReservationController {
     public void changeStatus(String stageCopyId, String seatsId, String status){
         theatreClient.changeStatus(stageCopyId,seatsId,status);
     }
+    public List<ReservationDto> gerReservations(){
+       return theatreClient.getReservations();
+    }
 }

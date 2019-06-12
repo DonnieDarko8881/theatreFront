@@ -16,6 +16,11 @@ public class SpectacleDto {
     @JsonProperty("stageId")
     private Long stageId;
 
+    public SpectacleDto(String name, Long stageId) {
+        this.name = name;
+        this.stageId = stageId;
+    }
+
     @Override
     public String toString() {
         return name;

@@ -11,7 +11,5 @@ public class TheatreFrontApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TheatreFrontApplication.class, args);
-
     }
-
 }

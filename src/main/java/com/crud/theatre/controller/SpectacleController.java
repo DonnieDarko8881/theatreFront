@@ -27,5 +27,17 @@ public class SpectacleController {
         return theatreClient.getCast(spectacleId);
     }
 
+    public void saveSpectacle(SpectacleDto spectacleDto){
+        theatreClient.saveSpectacle(spectacleDto);
+    }
+
+    public void addActorToCast(String spectacleId, String actorId){
+        theatreClient.addActorToCast(spectacleId,actorId);
+    }
+
+    public void deleteSpectacle(String spectacleId){
+        theatreClient.deleteSpectacle(spectacleId);
+    }
+
 }
 

@@ -65,7 +65,8 @@ public class Repertoire extends VerticalLayout {
     private void saveCopyStage() {
         String stageId = copyStageForm.getStageIdText().getValue();
         String dateId = copyStageForm.getDateIdText().getValue();
-        repertoireController.saveStageCopy(stageId, dateId);
+        String spectaclePrice = String.valueOf(copyStageForm.getSpectaclePrice().getValue());
+        repertoireController.saveStageCopy(stageId, dateId,spectaclePrice);
         refresh();
         reservation.refresh();
     }

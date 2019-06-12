@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -15,4 +16,5 @@ public class StageCopy {
     private String date;
     private String spectacleName;
     private List<SeatsDto> seats;
+    private BigDecimal spectaclePricePLN;
 }

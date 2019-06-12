@@ -51,6 +51,7 @@ public class Spectacles extends VerticalLayout {
         spectacleGrid.asSingleSelect().addValueChangeListener(event -> {
             actorsGrid.setVisible(true);
             actorsGrid.setItems(getCast(event.getValue().getId()));
+            refresh();
         });
 
     }

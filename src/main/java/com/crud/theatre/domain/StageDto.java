@@ -17,4 +17,14 @@ public class StageDto {
     private String name;
     @JsonProperty("seatsAmount")
     private int seatsAmount;
+
+    public StageDto(String name, int seatsAmount) {
+        this.name = name;
+        this.seatsAmount = seatsAmount;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class ReservationDto {
     private Long reservationId;
+    private LocalDateTime reservationDate;
     private Long userId;
     private Long stageCopyId;
     private Long seatsId;

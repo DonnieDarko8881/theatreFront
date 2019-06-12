@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class StageCopyDto {
     private List<SeatsDto> seats;
     @JsonProperty("spectacleDateDto")
     private SpectacleDateDto spectacleDateDto;
+    @JsonProperty("spectaclePricePLN")
+    private BigDecimal spectaclePricePLN;
 
     @Override
     public String toString() {

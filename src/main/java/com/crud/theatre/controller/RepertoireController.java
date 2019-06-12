@@ -31,7 +31,7 @@ public class RepertoireController {
         return theatreClient.getSpectacleDtoList();
     }
 
-    public void saveSpectacleDate(long spectacleId, String spectacleDate ){
+    public void saveSpectacleDate(long spectacleId, String spectacleDate){
         theatreClient.saveSpectacleDate(spectacleId,spectacleDate);
     }
 
@@ -39,7 +39,7 @@ public class RepertoireController {
         theatreClient.deleteSpectacleDate(dateId);
     }
 
-    public void saveStageCopy(String stageId, String dateId){
-        theatreClient.saveStageCopy(stageId,dateId);
+    public void saveStageCopy(String stageId, String dateId, String spectaclePrice){
+        theatreClient.saveStageCopy(stageId,dateId,spectaclePrice);
     }
 }

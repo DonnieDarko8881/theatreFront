@@ -86,7 +86,7 @@ public class Stage extends VerticalLayout {
     }
 
     private void save() {
-        StageDto stageDto = new StageDto(stageName.getValue(), seatsAmount.getValue().intValue());
+        StageDto stageDto = new StageDto(1L, stageName.getValue(), seatsAmount.getValue().intValue());
         stageController.saveStage(stageDto);
         saveStageForm.setVisible(true);
         refresh();

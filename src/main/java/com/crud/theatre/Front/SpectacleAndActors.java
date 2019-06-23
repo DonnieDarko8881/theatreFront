@@ -65,13 +65,17 @@ public class SpectacleAndActors extends VerticalLayout {
     private SpectacleController spectacleController;
     private StageController stageController;
     private Theatre theatre;
+    private Spectacles spectacles;
+    private Actors actors;
 
     @Autowired
-    public SpectacleAndActors(ActorController actorController, SpectacleController spectacleController, StageController stageController, Theatre theatre) {
+    public SpectacleAndActors(ActorController actorController, SpectacleController spectacleController, StageController stageController, Theatre theatre, Spectacles spectacles, Actors actors) {
         this.actorController = actorController;
         this.spectacleController = spectacleController;
         this.stageController = stageController;
         this.theatre = theatre;
+        this.spectacles = spectacles;
+        this.actors = actors;
         add(buttonsMenu, mainContent);
         setSizeOfContents();
         setVisibilityComponents();
@@ -219,6 +223,8 @@ public class SpectacleAndActors extends VerticalLayout {
         stagesComboBox.setItems(stageController.getStages());
         actorsComboBox.setItems(actorController.getActors());
         setVisibilityComponents();
+        spectacles.refresh();
+        actors.refresh();
     }
 
     private void setSizeOfContents() {

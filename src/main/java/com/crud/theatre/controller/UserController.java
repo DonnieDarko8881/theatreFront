@@ -22,11 +22,11 @@ public class UserController {
     }
 
     public Boolean mailExist(String mail){
-        return theatreClient.mailExist(mail);
+        return theatreClient.mailExist(mail).isSuccess();
     }
 
     public Boolean loginSuccess(String mail, String password){
-       return theatreClient.loginSuccess(mail, password);
+       return theatreClient.loginSuccess(mail, password).isSuccess();
     }
 
     public UserDto getUserDtoByMail(String mail){

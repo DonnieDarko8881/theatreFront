@@ -33,7 +33,7 @@ public class User extends VerticalLayout {
         setSizeFull();
         usersGrid.setSizeFull();
 
-        usersGrid.setColumns("id", "firstName", "lastName", "mail", "password");
+        usersGrid.setColumns("id", "firstName", "lastName", "mail");
 
         refreshButton.addClickListener(event -> refresh());
 

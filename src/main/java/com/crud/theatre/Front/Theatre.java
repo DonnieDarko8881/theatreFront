@@ -27,7 +27,6 @@ public class Theatre extends VerticalLayout {
     private Button administationPanelButton = new Button("Administration Panel");
     private Button spectacle = new Button("Spectacle");
     private Button actors = new Button("Actors");
-    private Button repertoire = new Button("Repertoire");
     private Button reservation = new Button("Reservation");
     private FormLayout loginForm = new FormLayout(mailText, passwordField, signInButton, registerButton);
 
@@ -41,7 +40,7 @@ public class Theatre extends VerticalLayout {
         this.registerForm = registerForm;
         this.userController = userController;
 
-        HorizontalLayout toolBar = new HorizontalLayout(login, administationPanelButton, spectacle, actors, repertoire, reservation);
+        HorizontalLayout toolBar = new HorizontalLayout(login, administationPanelButton, spectacle, actors, reservation);
         add(toolBar, loginForm, this.registerForm);
         loginForm.setWidth("400px");
         loginForm.setVisible(false);
@@ -51,7 +50,6 @@ public class Theatre extends VerticalLayout {
 
         navigate(spectacle, "spectacles");
         navigate(actors, "actors");
-        navigate(repertoire, "repertoire");
         navigate(reservation, "reservation");
         navigate(administationPanelButton, "adminPanel");
 
@@ -72,16 +70,15 @@ public class Theatre extends VerticalLayout {
                 Notification.show("Logged in successfully");
                 loginForm.setVisible(false);
                 administationPanelButton.setVisible(false);
-            } else if (mailText.getValue().equals("ADMIN") && passwordField.getValue().equals("ADMIN")) {
-                setUserId("ADMIN");
-                administationPanelButton.setVisible(true);
-                loginForm.setVisible(false);
             } else {
                 Notification.show("Password or mail is wrong");
             }
+            if (mailText.getValue().equals("ADMIN") && passwordField.getValue().equals("ADMIN")) {
+                setUserId("ADMIN");
+                administationPanelButton.setVisible(true);
+                loginForm.setVisible(false);
+            }
         });
-
-
     }
 
     protected void navigate(Button button, String location) {

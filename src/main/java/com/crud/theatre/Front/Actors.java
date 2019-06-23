@@ -64,7 +64,7 @@ public class Actors extends VerticalLayout {
         });
     }
 
-    private void refresh() {
+    public void refresh() {
         actorsGrid.setItems(actorController.getActors());
     }
 

@@ -17,8 +17,6 @@ import java.util.List;
 public class StageCopyDto {
     @JsonProperty("id")
     private Long id;
-//    @JsonProperty("stageDto")
-//    private StageDto stageDto;
     @JsonProperty("seats")
     private List<SeatsDto> seats;
     @JsonProperty("spectacleDateDto")

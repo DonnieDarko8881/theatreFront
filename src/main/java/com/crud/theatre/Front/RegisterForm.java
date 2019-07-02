@@ -40,7 +40,6 @@ public class RegisterForm extends FormLayout {
             mailText.setInvalid(true);
             Notification.show(mailText.getValue() + " is existing in our DataBase. Try Login in");
             mailText.focus();
-
         }
     }
 }

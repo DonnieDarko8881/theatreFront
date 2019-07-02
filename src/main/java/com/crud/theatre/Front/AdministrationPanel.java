@@ -14,11 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AdministrationPanel extends VerticalLayout {
     private Button home = new Button(new Icon(VaadinIcon.HOME));
     private Button usersButton = new Button("Users");
-    private Button spectaclesActorsButton =  new Button("Spectacles And Actors");
+    private Button spectaclesActorsButton = new Button("Spectacles And Actors");
     private Button stagesButton = new Button("Stages");
+    private Button repertoireButton = new Button("Repertoire");
     private Button reservationsButton = new Button("Reservations");
-    private HorizontalLayout menuBarButtons = new HorizontalLayout(home,spectaclesActorsButton, stagesButton,
-            reservationsButton, usersButton);
+    private HorizontalLayout menuBarButtons = new HorizontalLayout(home, spectaclesActorsButton, stagesButton,
+            repertoireButton, reservationsButton, usersButton);
 
     private Theatre theatre;
 
@@ -27,10 +28,11 @@ public class AdministrationPanel extends VerticalLayout {
         this.theatre = theatre;
         add(menuBarButtons);
 
-        theatre.navigate(reservationsButton,"reservations");
-        theatre.navigate(spectaclesActorsButton,"spectacles&actors");
-        theatre.navigate(home,"");
-        theatre.navigate(stagesButton,"stages");
+        theatre.navigate(reservationsButton, "reservations");
+        theatre.navigate(spectaclesActorsButton, "spectacles&actors");
+        theatre.navigate(home, "");
+        theatre.navigate(stagesButton, "stages");
         theatre.navigate(usersButton, "users");
+        theatre.navigate(repertoireButton, "repertoire");
     }
 }

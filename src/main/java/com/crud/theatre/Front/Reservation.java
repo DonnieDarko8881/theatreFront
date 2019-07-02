@@ -32,9 +32,9 @@ public class Reservation extends VerticalLayout {
     private Grid<StageCopy> stageCopyDtoGrid = new Grid<>(StageCopy.class);
     private Button bookButton = new Button("Book");
     private Button changeStatusButton = new Button("Change Status");
-    //można utowrzyć klase z home
+    private Button refreshButton = new Button(new Icon(VaadinIcon.REFRESH));
     private Button home = new Button(new Icon(VaadinIcon.HOME));
-    private HorizontalLayout buttons = new HorizontalLayout(home, changeStatusButton);
+    private HorizontalLayout buttons = new HorizontalLayout(home, refreshButton, changeStatusButton);
     private VerticalLayout reservationForm = new VerticalLayout(userIdText, stageCopyIdText, seatsNumberText, bookButton);
     private HorizontalLayout mainContent = new HorizontalLayout(stageCopyDtoGrid, seatsGrid);
     private TextField seatsIdText = new TextField("Seats Id");
@@ -79,9 +79,10 @@ public class Reservation extends VerticalLayout {
 
         changeButton.addClickListener(event -> {
             changeStatus();
-
             refresh();
         });
+
+        refreshButton.addClickListener(event -> refresh());
 
         changeStatusButton.addClickListener(event -> {
             formes.setVisible(true);
@@ -137,8 +138,6 @@ public class Reservation extends VerticalLayout {
             }
             userIdText.focus();
         });
-
-
     }
 
     private void changeStatus() {
@@ -164,7 +163,6 @@ public class Reservation extends VerticalLayout {
         stageCopyDtoGrid.setItems(reservationController.getStageCopies());
         seatsGrid.deselectAll();
         stageCopyDtoGrid.deselectAll();
-//        userIdText.setValue("");
         seatsGrid.setVisible(false);
         formes.setVisible(false);
         changeStatusButton.setVisible(false);
@@ -172,9 +170,5 @@ public class Reservation extends VerticalLayout {
 
     private List<SeatsDto> getSeats(StageCopy stageCopy) {
         return stageCopy.getSeats();
-    }
-
-    public TextField getUserIdText() {
-        return userIdText;
     }
 }

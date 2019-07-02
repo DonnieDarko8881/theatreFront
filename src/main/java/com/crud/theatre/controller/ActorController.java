@@ -17,19 +17,19 @@ public class ActorController {
         this.theatreClient = theatreClient;
     }
 
-    public List<SpectacleDto> getSpectaclesOfAcotr(long actorId){
+    public List<SpectacleDto> getSpectaclesOfAcotr(long actorId) {
         return theatreClient.getSpectaclesOfActor(actorId);
     }
 
-    public List<ActorDto> getActors(){
-       return theatreClient.getActorsDtoList();
+    public List<ActorDto> getActors() {
+        return theatreClient.getActorsDtoList();
     }
 
-    public void saveActor(ActorDto actorDto){
+    public void saveActor(ActorDto actorDto) {
         theatreClient.saveActor(actorDto);
     }
 
-    public void deleteActor(String actorId){
+    public void deleteActor(String actorId) {
         theatreClient.deleteActor(actorId);
     }
 }

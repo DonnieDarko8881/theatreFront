@@ -21,7 +21,8 @@ public class Spectacles extends VerticalLayout {
     private Grid<ActorDto> actorsGrid = new Grid<>(ActorDto.class);
     private Grid<SpectacleDto> spectacleGrid = new Grid<>(SpectacleDto.class);
     private Button home = new Button(new Icon(VaadinIcon.HOME));
-    private HorizontalLayout buttonsMenu = new HorizontalLayout(home);
+    private Button refreshButton = new Button(new Icon(VaadinIcon.REFRESH));
+    private HorizontalLayout buttonsMenu = new HorizontalLayout(home, refreshButton);
     private HorizontalLayout mainContent = new HorizontalLayout(spectacleGrid, actorsGrid);
 
     private Theatre theatre;
@@ -48,22 +49,26 @@ public class Spectacles extends VerticalLayout {
 
         refresh();
 
+        refreshButton.addClickListener(event -> refresh());
+
         spectacleGrid.asSingleSelect().addValueChangeListener(event -> {
-            actorsGrid.setVisible(true);
-            actorsGrid.setItems(getCast(event.getValue().getId()));
-            refresh();
+            try {
+                actorsGrid.setVisible(true);
+                actorsGrid.setItems(getCast(event.getValue().getId()));
+            } catch (NullPointerException e) {
+            }
         });
 
     }
 
-    private void refresh() {
+    public void refresh() {
         spectacleGrid.setItems(spectacleController.getSpectacles());
+        actorsGrid.setVisible(false);
     }
 
-    private List<ActorDto> getCast(long spectacleId){
+    private List<ActorDto> getCast(long spectacleId) {
         return spectacleController.getCast(spectacleId);
     }
-
 }
 
 

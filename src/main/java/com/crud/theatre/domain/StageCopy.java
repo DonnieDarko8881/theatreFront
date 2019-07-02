@@ -3,7 +3,6 @@ package com.crud.theatre.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 
 import java.math.BigDecimal;
 import java.util.List;

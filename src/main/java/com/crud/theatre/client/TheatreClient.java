@@ -19,7 +19,6 @@ import static java.util.Optional.ofNullable;
 public class TheatreClient {
     private RestTemplate restTemplate;
 
-
     public TheatreClient() {
         this.restTemplate = new RestTemplate();
     }
@@ -86,9 +85,9 @@ public class TheatreClient {
                 .build().encode().toUri();
     }
 
-    public Boolean loginSuccess(String mail, String password) {
+    public Success loginSuccess(String mail, String password) {
         URI url = getUriLoginSuccess(mail, password);
-        return restTemplate.getForObject(url, Boolean.class);
+        return restTemplate.getForObject(url, Success.class);
     }
 
 
@@ -101,11 +100,10 @@ public class TheatreClient {
                 .build().encode().toUri();
     }
 
-    public Boolean mailExist(String mail) {
+    public Success mailExist(String mail) {
         URI url = getUriMailExist(mail);
-        return restTemplate.getForObject(url, Boolean.class);
+        return restTemplate.getForObject(url, Success.class);
     }
-
 
     private URI getUriMailExist(String mail) {
         return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
@@ -306,11 +304,11 @@ public class TheatreClient {
     }
 
     public void addActorToCast(String spectacleId, String actorId) {
-        URI uri = getUriaddActorToCast(spectacleId, actorId);
+        URI uri = getUriAddActorToCast(spectacleId, actorId);
         restTemplate.put(uri, null);
     }
 
-    private URI getUriaddActorToCast(String spectacleId, String actorId) {
+    private URI getUriAddActorToCast(String spectacleId, String actorId) {
         return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
                 .path("/spectacles/")
                 .path(spectacleId)
@@ -319,5 +317,5 @@ public class TheatreClient {
                 .build().encode().toUri();
 
     }
-
 }
+

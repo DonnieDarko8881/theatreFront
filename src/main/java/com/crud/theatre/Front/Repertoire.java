@@ -42,7 +42,9 @@ public class Repertoire extends VerticalLayout {
         mainContent.setSizeFull();
 
         bookButton.addClickListener(event -> bookButton.getUI().ifPresent(ui -> ui.navigate("reservation")));
-
+        backToAdministrationPanel.addClickListener(event ->
+                backToAdministrationPanel.getUI().ifPresent(ui -> ui.navigate("adminPanel")));
+        
         datesGrid.setColumns("id", "date", "spectacleId", "spectacleName", "stageId", "stageName", "stageCopy");
         refresh();
         HorizontalLayout formes = new HorizontalLayout();

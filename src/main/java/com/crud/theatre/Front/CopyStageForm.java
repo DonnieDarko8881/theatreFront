@@ -13,7 +13,6 @@ public class CopyStageForm extends FormLayout {
     private Button saveCopyButton = new Button("Add Stage Copy");
 
     public CopyStageForm() {
-//        HorizontalLayout buttons = new HorizontalLayout(saveCopyButton);
         spectaclePrice.setHasControls(true);
         add(dateIdText, stageIdText, spectaclePrice, saveCopyButton);
     }

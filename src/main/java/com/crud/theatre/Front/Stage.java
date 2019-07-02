@@ -22,11 +22,11 @@ public class Stage extends VerticalLayout {
     private TextField stageName = new TextField("Stage Name");
     private TextField stagId = new TextField("Stage Id");
     private NumberField seatsAmount = new NumberField("Amount Of Seats");
-    private Button saveSeatsButton = new Button("Save");
+    private Button saveStageButton = new Button("Save");
     private Button backToAdministrationPanel = new Button(new Icon(VaadinIcon.BACKSPACE));
     private Button addNewStage = new Button("Add New Stage");
     private Grid<StageDto> stagesGrid = new Grid<>(StageDto.class);
-    private VerticalLayout saveStageForm = new VerticalLayout(stagId, stageName, seatsAmount, saveSeatsButton);
+    private VerticalLayout saveStageForm = new VerticalLayout(stagId, stageName, seatsAmount, saveStageButton);
     private HorizontalLayout stagesContent = new HorizontalLayout(stagesGrid, saveStageForm);
     private HorizontalLayout menuButtons = new HorizontalLayout(backToAdministrationPanel, addNewStage);
 
@@ -44,17 +44,19 @@ public class Stage extends VerticalLayout {
         seatsAmount.setMin(10);
         seatsAmount.setHasControls(true);
 
-        saveSeatsButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        saveStageButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
 
         stagesGrid.setColumns("id", "name", "seatsAmount");
 
         refresh();
         addNewStage.addClickListener(event -> {
             stagId.setVisible(false);
+            stageName.clear();
+            seatsAmount.clear();
             saveStageForm.setVisible(true);
         });
 
-        saveSeatsButton.addClickListener(event -> {
+        saveStageButton.addClickListener(event -> {
             if (!stagId.isVisible()) {
                 save();
             } else {
@@ -86,7 +88,7 @@ public class Stage extends VerticalLayout {
     }
 
     private void save() {
-        StageDto stageDto = new StageDto(1L, stageName.getValue(), seatsAmount.getValue().intValue());
+        StageDto stageDto = new StageDto(stageName.getValue(), seatsAmount.getValue().intValue());
         stageController.saveStage(stageDto);
         saveStageForm.setVisible(true);
         refresh();

@@ -107,7 +107,7 @@ public class Repertoire extends VerticalLayout {
         } catch (DateTimeParseException e) {
             Notification.show("Date has to have format \"yyyy-mm-ddThh:mm\", for example \"2000-03-10T18:35\"");
         } catch (NullPointerException e) {
-            Notification.show("To Create Date is neccesary to choose Spectacle");
+            Notification.show("To Create Date is necessary to choose Spectacle");
         }
         refresh();
     }
@@ -119,9 +119,5 @@ public class Repertoire extends VerticalLayout {
 
     private List<SpectacleDto> getSpectacles() {
         return repertoireController.getSpectacles();
-    }
-
-    public CopyStageForm getCopyStageForm() {
-        return copyStageForm;
     }
 }

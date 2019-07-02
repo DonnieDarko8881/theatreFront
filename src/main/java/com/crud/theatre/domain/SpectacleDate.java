@@ -15,5 +15,4 @@ public class SpectacleDate {
     private long stageId;
     private String stageName;
     private StageCopyDto stageCopy;
-
 }

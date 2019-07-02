@@ -12,22 +12,17 @@ public class SpectacleDateForm extends FormLayout {
     private Button deleteButton = new Button("Delete Date");
     private HorizontalLayout buttons = new HorizontalLayout(addDateButton, deleteButton);
     private TextField date = new TextField("Spectacle Date");
-//    Binder<SpectacleDate> binder = new Binder<>(SpectacleDate.class);
     private Repertoire repertoire;
 
 
-
-    public SpectacleDateForm(Repertoire repertoire) throws URISyntaxException {
+    public SpectacleDateForm(Repertoire repertoire) {
         this.repertoire = repertoire;
 
         date.setPlaceholder("yyyy-mm-ddThh:mm");
         date.setWidth("100px");
         add(date);
         setWidth("50%");
-//        binder.bindInstanceFields(this);
-
     }
-
 
 
     public Button getDeleteButton() {

@@ -10,30 +10,30 @@ import java.util.List;
 @Component
 public class UserController {
 
-   private final  TheatreClient theatreClient;
+    private final TheatreClient theatreClient;
 
-   @Autowired
+    @Autowired
     public UserController(TheatreClient theatreClient) {
         this.theatreClient = theatreClient;
     }
 
-    public void save(UserDto userDto){
+    public void save(UserDto userDto) {
         theatreClient.saveUser(userDto);
     }
 
-    public Boolean mailExist(String mail){
+    public Boolean mailExist(String mail) {
         return theatreClient.mailExist(mail).isSuccess();
     }
 
-    public Boolean loginSuccess(String mail, String password){
-       return theatreClient.loginSuccess(mail, password).isSuccess();
+    public Boolean loginSuccess(String mail, String password) {
+        return theatreClient.loginSuccess(mail, password).isSuccess();
     }
 
-    public UserDto getUserDtoByMail(String mail){
-       return  theatreClient.getUserByMail(mail);
+    public UserDto getUserDtoByMail(String mail) {
+        return theatreClient.getUserByMail(mail);
     }
 
-    public List<UserDto> getUsers(){
-       return theatreClient.getUsers();
+    public List<UserDto> getUsers() {
+        return theatreClient.getUsers();
     }
 }

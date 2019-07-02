@@ -4,7 +4,6 @@ import com.crud.theatre.client.TheatreClient;
 import com.crud.theatre.domain.ReservationDto;
 import com.crud.theatre.domain.StageCopy;
 import com.crud.theatre.mapper.StageCopyMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +21,19 @@ public class ReservationController {
         this.mapper = mapper;
     }
 
-    public List<StageCopy> getStageCopies(){
+    public List<StageCopy> getStageCopies() {
         return mapper.mapToStageCopyList(theatreClient.getStageCopiesDtoList());
     }
 
-    public void saveReservation(ReservationDto reservationDto){
+    public void saveReservation(ReservationDto reservationDto) {
         theatreClient.saveReservation(reservationDto);
     }
 
-    public void changeStatus(String stageCopyId, String seatsId, String status){
-        theatreClient.changeStatus(stageCopyId,seatsId,status);
+    public void changeStatus(String stageCopyId, String seatsId, String status) {
+        theatreClient.changeStatus(stageCopyId, seatsId, status);
     }
-    public List<ReservationDto> gerReservations(){
-       return theatreClient.getReservations();
+
+    public List<ReservationDto> gerReservations() {
+        return theatreClient.getReservations();
     }
 }

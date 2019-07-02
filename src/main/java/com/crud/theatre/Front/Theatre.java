@@ -34,7 +34,6 @@ public class Theatre extends VerticalLayout {
     private FormLayout registerForm;
     private UserController userController;
 
-    //    private Reservation resev;
     @Autowired
     public Theatre(FormLayout registerForm, UserController userController) {
         this.registerForm = registerForm;

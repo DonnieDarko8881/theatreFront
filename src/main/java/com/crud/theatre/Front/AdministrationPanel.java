@@ -33,6 +33,6 @@ public class AdministrationPanel extends VerticalLayout {
         theatre.navigate(home, "");
         theatre.navigate(stagesButton, "stages");
         theatre.navigate(usersButton, "users");
-        theatre.navigate(repertoireButton,"repertoire");
+        theatre.navigate(repertoireButton, "repertoire");
     }
 }

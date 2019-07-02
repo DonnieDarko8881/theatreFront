@@ -57,7 +57,7 @@ public class Actors extends VerticalLayout {
                         + event.getValue().getFirstName() + " "
                         + event.getValue().getLastName() + " in:");
                 spectacleGrid.setItems(getSpectacles(event.getValue().getId()));
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
 
             }
             refresh();

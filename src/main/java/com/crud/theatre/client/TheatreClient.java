@@ -19,7 +19,6 @@ import static java.util.Optional.ofNullable;
 public class TheatreClient {
     private RestTemplate restTemplate;
 
-
     public TheatreClient() {
         this.restTemplate = new RestTemplate();
     }
@@ -112,7 +111,7 @@ public class TheatreClient {
                 .path(mail)
                 .build().encode().toUri();
     }
-    
+
     public List<UserDto> getUsers() {
         URI url = null;
         try {

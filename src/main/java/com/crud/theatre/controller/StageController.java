@@ -2,7 +2,6 @@ package com.crud.theatre.controller;
 
 import com.crud.theatre.client.TheatreClient;
 import com.crud.theatre.domain.StageDto;
-import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,15 +17,15 @@ public class StageController {
         this.theatreClient = theatreClient;
     }
 
-    public List<StageDto> getStages(){
+    public List<StageDto> getStages() {
         return theatreClient.getStages();
     }
 
-    public void saveStage(StageDto stageDto){
+    public void saveStage(StageDto stageDto) {
         theatreClient.saveStage(stageDto);
     }
 
-    public void updateStage(StageDto stageDto){
+    public void updateStage(StageDto stageDto) {
         theatreClient.updateStage(stageDto);
     }
 }

@@ -5,10 +5,8 @@ import com.crud.theatre.domain.SpectacleDate;
 import com.crud.theatre.domain.SpectacleDto;
 import com.crud.theatre.mapper.SpectacleDateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 @Service
@@ -23,23 +21,23 @@ public class RepertoireController {
         this.dateMapper = dateMapper;
     }
 
-    public List<SpectacleDate> getDates()  {
+    public List<SpectacleDate> getDates() {
         return dateMapper.mapToSpectacleDates(theatreClient.getSpectacleDateDto());
     }
 
-    public List<SpectacleDto> getSpectacles(){
+    public List<SpectacleDto> getSpectacles() {
         return theatreClient.getSpectacleDtoList();
     }
 
-    public void saveSpectacleDate(long spectacleId, String spectacleDate){
-        theatreClient.saveSpectacleDate(spectacleId,spectacleDate);
+    public void saveSpectacleDate(long spectacleId, String spectacleDate) {
+        theatreClient.saveSpectacleDate(spectacleId, spectacleDate);
     }
 
-    public void deleteSpectacleDate(String dateId){
+    public void deleteSpectacleDate(String dateId) {
         theatreClient.deleteSpectacleDate(dateId);
     }
 
-    public void saveStageCopy(String stageId, String dateId, String spectaclePrice){
-        theatreClient.saveStageCopy(stageId,dateId,spectaclePrice);
+    public void saveStageCopy(String stageId, String dateId, String spectaclePrice) {
+        theatreClient.saveStageCopy(stageId, dateId, spectaclePrice);
     }
 }

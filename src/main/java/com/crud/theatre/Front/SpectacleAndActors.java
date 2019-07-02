@@ -51,7 +51,7 @@ public class SpectacleAndActors extends VerticalLayout {
     private FormLayout saveSpectacleForm = new FormLayout(spectacleName, stagesComboBox, saveSpectacleButton);
     private FormLayout addActorToCastForm = new FormLayout(spectacleIdText, actorsComboBox, addToCastButton);
     private FormLayout deleteActorForm = new FormLayout(actorIdText, deleteActorButton);
-    private FormLayout deleteSpectacleForm  = new FormLayout(spectacleIdToRemoveText,deleteSpectacleButton);
+    private FormLayout deleteSpectacleForm = new FormLayout(spectacleIdToRemoveText, deleteSpectacleButton);
     private HorizontalLayout buttonsMenu = new HorizontalLayout(backToAdministrationPanel, addNewActorButton,
             addNewSpectacleButton, addActorToCastButton);
     private HorizontalLayout actorsContent = new HorizontalLayout(actorsGrid, spectaclesOfActorGrid);
@@ -80,7 +80,7 @@ public class SpectacleAndActors extends VerticalLayout {
         setSizeOfContents();
         setVisibilityComponents();
 
-        setProperitesOfButtons();
+        setPropertiesOfButtons();
 
         saveActorButton.addClickListener(event -> saveActor());
         saveSpectacleButton.addClickListener(event -> saveSpectacle());
@@ -89,7 +89,7 @@ public class SpectacleAndActors extends VerticalLayout {
         deleteSpectacleButton.addClickListener(event -> deleteSpectacle());
 
 
-        setAddClickListinerButtonMenu();
+        setAddClickListenerButtonMenu();
 
         theatre.navigate(backToAdministrationPanel, "adminPanel");
         setGridsColumns();
@@ -127,7 +127,7 @@ public class SpectacleAndActors extends VerticalLayout {
         refresh();
     }
 
-    private void setProperitesOfButtons() {
+    private void setPropertiesOfButtons() {
         saveActorButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
         saveSpectacleButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
         addToCastButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
@@ -138,7 +138,7 @@ public class SpectacleAndActors extends VerticalLayout {
         actorIdText.setReadOnly(true);
     }
 
-    private void setAddClickListinerButtonMenu() {
+    private void setAddClickListenerButtonMenu() {
         addNewActorButton.addClickListener(event -> {
             refresh();
             setVisibilityAfterClickinOnMenuButton(allFormesContent, saveActorForm, saveSpectacleForm, addActorToCastForm);

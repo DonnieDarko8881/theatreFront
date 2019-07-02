@@ -32,7 +32,7 @@ public class Reservations extends VerticalLayout {
         setSizeFull();
         reservationGrid.setSizeFull();
 
-        reservationGrid.setColumns("reservationId", "reservationDate", "userId","stageCopyId", "seatsId", "seatsNumber");
+        reservationGrid.setColumns("reservationId", "reservationDate", "userId", "stageCopyId", "seatsId", "seatsNumber");
 
         refreshButton.addClickListener(event -> refresh());
 

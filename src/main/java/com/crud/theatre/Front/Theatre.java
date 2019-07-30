@@ -12,10 +12,12 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = "")
 @SpringComponent
+@UIScope
 public class Theatre extends VerticalLayout {
     private String userId;
     private TextField mailText = new TextField("Mail");

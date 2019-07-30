@@ -14,10 +14,12 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route("stages")
 @SpringComponent
+@UIScope
 public class Stage extends VerticalLayout {
     private TextField stageName = new TextField("Stage Name");
     private TextField stagId = new TextField("Stage Id");

@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URISyntaxException;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Route("repertoire")
 @SpringComponent
+@UIScope
 public class Repertoire extends VerticalLayout {
     private Button backToAdministrationPanel = new Button(new Icon(VaadinIcon.BACKSPACE));
     private Button bookButton = new Button("Book");

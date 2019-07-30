@@ -17,6 +17,8 @@ import static java.util.Optional.ofNullable;
 
 @Component
 public class TheatreClient {
+    public final static String BASE_URL = "https://theatreapp.herokuapp.com/v1/";
+//    public final static String BASE_URL = "http://localhost:8080/v1/";
     private RestTemplate restTemplate;
 
     public TheatreClient() {
@@ -27,7 +29,7 @@ public class TheatreClient {
 
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/dates");
+            url = new URI(BASE_URL + "dates");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -40,7 +42,7 @@ public class TheatreClient {
     public List<SpectacleDto> getSpectacleDtoList() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/spectacles");
+            url = new URI(BASE_URL + "spectacles");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -52,7 +54,7 @@ public class TheatreClient {
     public List<ActorDto> getActorsDtoList() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/actors");
+            url = new URI(BASE_URL + "actors");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -64,7 +66,7 @@ public class TheatreClient {
     public List<StageDto> getStages() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/stages");
+            url = new URI(BASE_URL + "stages");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -79,8 +81,8 @@ public class TheatreClient {
     }
 
     private URI getUriUserByMail(String mail) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/users/findBy/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("users/findBy/")
                 .path(mail)
                 .build().encode().toUri();
     }
@@ -92,8 +94,8 @@ public class TheatreClient {
 
 
     private URI getUriLoginSuccess(String mail, String password) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/users/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("users/")
                 .path(mail)
                 .path("/")
                 .path(password)
@@ -106,8 +108,8 @@ public class TheatreClient {
     }
 
     private URI getUriMailExist(String mail) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/users/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("users/")
                 .path(mail)
                 .build().encode().toUri();
     }
@@ -115,7 +117,7 @@ public class TheatreClient {
     public List<UserDto> getUsers() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/users");
+            url = new URI(BASE_URL + "users");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -127,7 +129,7 @@ public class TheatreClient {
     public List<ReservationDto> getReservations() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/reservations");
+            url = new URI(BASE_URL + "reservations");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -145,8 +147,8 @@ public class TheatreClient {
 
     private URI getUriSpectaclesOfActors(long actorId) {
         String actorIdString = String.valueOf(actorId);
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/actors/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("actors/")
                 .path(actorIdString)
                 .path("/spectacles")
                 .build().encode().toUri();
@@ -161,8 +163,8 @@ public class TheatreClient {
 
     private URI getUriCast(long spectacleId) {
         String spectacleIdString = String.valueOf(spectacleId);
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/spectacles/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("spectacles/")
                 .path(spectacleIdString)
                 .path("/cast")
                 .build().encode().toUri();
@@ -171,7 +173,7 @@ public class TheatreClient {
     public List<StageCopyDto> getStageCopiesDtoList() {
         URI url = null;
         try {
-            url = new URI("http://localhost:8080/v1/stageCopies");
+            url = new URI(BASE_URL + "stageCopies");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -186,8 +188,8 @@ public class TheatreClient {
     }
 
     private URI getUriChangeStatus(String stageCopyId, String seatsId, String status) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/stageCopies/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("stageCopies/")
                 .path(stageCopyId)
                 .path("/seats/")
                 .path(seatsId)
@@ -197,37 +199,37 @@ public class TheatreClient {
     }
 
     public void saveStage(StageDto stageDto) {
-        String url = "http://localhost:8080/v1/stages";
+        String url = BASE_URL + "stages";
         HttpEntity<StageDto> request = new HttpEntity<>(stageDto);
         restTemplate.postForEntity(url, request, StageDto.class);
     }
 
     public void updateStage(StageDto stageDto) {
-        String url = "http://localhost:8080/v1/stages";
+        String url = BASE_URL + "stages";
         HttpEntity<StageDto> request = new HttpEntity<>(stageDto);
         restTemplate.put(url, request, StageDto.class);
     }
 
     public void saveReservation(ReservationDto reservationDto) {
-        String url = "http://localhost:8080/v1/reservations";
+        String url = BASE_URL + "reservations";
         HttpEntity<ReservationDto> request = new HttpEntity<>(reservationDto);
         restTemplate.postForEntity(url, request, ReservationDto.class);
     }
 
     public void saveUser(UserDto userDto) {
-        String url = "http://localhost:8080/v1/users";
+        String url = BASE_URL + "users";
         HttpEntity<UserDto> request = new HttpEntity<>(userDto);
         restTemplate.postForEntity(url, request, UserDto.class);
     }
 
     public void saveActor(ActorDto actorDto) {
-        String url = "http://localhost:8080/v1/actors";
+        String url = BASE_URL + "actors";
         HttpEntity<ActorDto> request = new HttpEntity<>(actorDto);
         restTemplate.postForEntity(url, request, ActorDto.class);
     }
 
     public void saveSpectacle(SpectacleDto spectacleDto) {
-        String url = "http://localhost:8080/v1/spectacles";
+        String url = BASE_URL + "spectacles";
         HttpEntity<SpectacleDto> request = new HttpEntity<>(spectacleDto);
         restTemplate.postForEntity(url, request, SpectacleDto.class);
     }
@@ -242,8 +244,8 @@ public class TheatreClient {
 
     private URI getUriSaveSpectacleDate(long spectacleId) {
         String spectacleIdString = String.valueOf(spectacleId);
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/spectacles/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("spectacles/")
                 .path(spectacleIdString)
                 .path("/dates")
                 .build().encode().toUri();
@@ -255,8 +257,8 @@ public class TheatreClient {
     }
 
     private URI getUriDeleteSpectacleDate(String dateId) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/dates/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("dates/")
                 .path(dateId)
                 .build().encode().toUri();
     }
@@ -267,8 +269,8 @@ public class TheatreClient {
     }
 
     private URI getUriDeleteActor(String actorId) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/actors/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("actors/")
                 .path(actorId)
                 .build().encode().toUri();
     }
@@ -279,8 +281,8 @@ public class TheatreClient {
     }
 
     private URI getUriDeleteSpectacle(String spectacleId) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/spectacles/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("spectacles/")
                 .path(spectacleId)
                 .build().encode().toUri();
     }
@@ -293,8 +295,8 @@ public class TheatreClient {
     }
 
     private URI getUriSaveStageCopy(String stageId, String dateId, String spectaclePrice) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/stageCopies/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("stageCopies/")
                 .path(stageId)
                 .path("/dates/")
                 .path(dateId)
@@ -309,13 +311,12 @@ public class TheatreClient {
     }
 
     private URI getUriAddActorToCast(String spectacleId, String actorId) {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1")
-                .path("/spectacles/")
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .path("spectacles/")
                 .path(spectacleId)
                 .path("/actors/")
                 .path(actorId)
                 .build().encode().toUri();
-
     }
 }
 

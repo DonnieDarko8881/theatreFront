@@ -18,6 +18,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Route("spectacles&actors")
 @SpringComponent
+@UIScope
 public class SpectacleAndActors extends VerticalLayout {
     private TextField firstName = new TextField("First Name");
     private TextField lastName = new TextField("Last Name");

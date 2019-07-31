@@ -11,12 +11,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Route("spectacles")
 @SpringComponent
+@UIScope
 public class Spectacles extends VerticalLayout {
     private Grid<ActorDto> actorsGrid = new Grid<>(ActorDto.class);
     private Grid<SpectacleDto> spectacleGrid = new Grid<>(SpectacleDto.class);

@@ -8,9 +8,11 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringComponent
+@UIScope
 public class RegisterForm extends FormLayout {
     private TextField firstName = new TextField("First Name");
     private TextField lastName = new TextField("Last Name");

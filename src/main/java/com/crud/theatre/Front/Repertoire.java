@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URISyntaxException;
@@ -21,9 +22,11 @@ import java.util.List;
 
 @Route("repertoire")
 @SpringComponent
+@UIScope
 public class Repertoire extends VerticalLayout {
     private Button backToAdministrationPanel = new Button(new Icon(VaadinIcon.BACKSPACE));
     private Button bookButton = new Button("Book");
+    private Button refreshButton = new Button(new Icon(VaadinIcon.REFRESH));
     private Grid<SpectacleDate> datesGrid = new Grid<>(SpectacleDate.class);
     private SpectacleDateForm dateForm = new SpectacleDateForm(this);
     private ComboBox<SpectacleDto> spectaclesName = new ComboBox<>("Spectacle");
@@ -32,11 +35,12 @@ public class Repertoire extends VerticalLayout {
     private RepertoireController repertoireController;
     private Reservation reservation;
 
+
     @Autowired
     public Repertoire(RepertoireController repertoireController, Reservation reservation) throws URISyntaxException {
         this.repertoireController = repertoireController;
         this.reservation = reservation;
-        HorizontalLayout buttonsMenu = new HorizontalLayout(backToAdministrationPanel, bookButton);
+        HorizontalLayout buttonsMenu = new HorizontalLayout(backToAdministrationPanel, refreshButton, bookButton);
 
         HorizontalLayout mainContent = new HorizontalLayout(datesGrid, bookButton);
         mainContent.setSizeFull();
@@ -44,7 +48,9 @@ public class Repertoire extends VerticalLayout {
         bookButton.addClickListener(event -> bookButton.getUI().ifPresent(ui -> ui.navigate("reservation")));
         backToAdministrationPanel.addClickListener(event ->
                 backToAdministrationPanel.getUI().ifPresent(ui -> ui.navigate("adminPanel")));
-        
+
+        refreshButton.addClickListener(event -> refresh());
+      
         datesGrid.setColumns("id", "date", "spectacleId", "spectacleName", "stageId", "stageName", "stageCopy");
         refresh();
         HorizontalLayout formes = new HorizontalLayout();
@@ -84,6 +90,7 @@ public class Repertoire extends VerticalLayout {
         copyStageForm.getDateIdText().setValue("");
         copyStageForm.getStageIdText().setValue("");
         dateForm.getDate().setValue("");
+        spectaclesName.setItems(getSpectacles());
     }
 
     private void deleteDate() {

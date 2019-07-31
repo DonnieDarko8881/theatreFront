@@ -50,7 +50,7 @@ public class Repertoire extends VerticalLayout {
                 backToAdministrationPanel.getUI().ifPresent(ui -> ui.navigate("adminPanel")));
 
         refreshButton.addClickListener(event -> refresh());
-
+      
         datesGrid.setColumns("id", "date", "spectacleId", "spectacleName", "stageId", "stageName", "stageCopy");
         refresh();
         HorizontalLayout formes = new HorizontalLayout();
